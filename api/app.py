@@ -1,6 +1,5 @@
 import json
 import re
-import time
 
 import requests
 from flask import Flask, request, make_response
@@ -20,37 +19,34 @@ def hello_world():
     return 'Hello World!'
 
 
-@app.route('/time')
-def get_current_time():
-    return {'time': time.time()}
-
-
 @app.route('/create_phrase', methods=['POST'])
 def data_handler():
-    data = json.loads(request.get_data())
+    # data = json.loads(request.get_data())
+    # temp = request.json.get("firstName")
     user_input = dict(
-        first_name=data["firstName"],
-        last_name=data["lastName"],
-        zip_code=data["zipCode"]
+        first_name=request.json["firstName"],
+        last_name=request.json["lastName"],
+        zip_code=request.json["zipCode"]
     )
-    print(user_input)
 
     data_validation(user_input)
 
-    # zipcode = user_input["zip_code"]
-    # population_req = requests.get(
-    #     "https://service.zipapi.us/zipcode/{0}?X-API-KEY={1}&fields=geolocation,population".format(zipcode,
-    #                                                                                                ZIP_API_KEY),
-    #     auth=HTTPBasicAuth(ZIP_USER_EMAIL, ZIP_USER_PASSWORD))
-    # county_req = requests.get("https://service.zipapi.us/zipcode/county/{0}?X-API-KEY={1}".format(zipcode, ZIP_API_KEY),
-    #                           auth=HTTPBasicAuth(ZIP_USER_EMAIL, ZIP_USER_PASSWORD))
-    #
-    # population = json.loads(population_req.content)["data"]["population"]
-    # county = json.loads(county_req.content)["data"]["county"][0]
-
-    county = mock_database["02115"][0]
-    population = mock_database["02115"][1]
     pig_latin_first_name, pig_latin_last_name = pigLatinTransformer(user_input["first_name"], user_input["last_name"])
+    zipcode = user_input["zip_code"]
+    if zipcode == "02115":
+        county = mock_database["02115"][0]
+        population = mock_database["02115"][1]
+    else:
+        population_req = requests.get(
+            "https://service.zipapi.us/zipcode/{0}?X-API-KEY={1}&fields=geolocation,population".format(zipcode,
+                                                                                                       ZIP_API_KEY),
+            auth=HTTPBasicAuth(ZIP_USER_EMAIL, ZIP_USER_PASSWORD))
+        county_req = requests.get(
+            "https://service.zipapi.us/zipcode/county/{0}?X-API-KEY={1}".format(zipcode, ZIP_API_KEY),
+            auth=HTTPBasicAuth(ZIP_USER_EMAIL, ZIP_USER_PASSWORD))
+
+        population = json.loads(population_req.content)["data"]["population"]
+        county = json.loads(county_req.content)["data"]["county"][0]
 
     content = {"firstName": pig_latin_first_name,
                "lastName": pig_latin_last_name,
@@ -114,5 +110,9 @@ def pigLatinTransformer(first: str, last: str) -> (str, str):
     l_name += "ay"
 
     return f_name, l_name
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
 
