@@ -25,5 +25,5 @@ yarn-error.log*
 !/__test__
 !/__mocks__
 
-.idea
-__pycache__
+/api/.idea
+/api/__pycache__
