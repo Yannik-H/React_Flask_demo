@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+# Getting Started
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Download and unzip the project. You can also find the project at 
 
-## Available Scripts
+[Github]: https://github.com/Yannik-H/React_Flask_demo.git
 
-In the project directory, you can run:
+### Install backend packages
 
-### `npm start`
+```bash
+$ python3 -m venv venv
+$ source venv/bin/activate
+(venv) $ _
+$ cd ./api
+$ pip install -r requirements.txt
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Install frontend packages
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+$ cd ../
+$ npm install
+```
 
-### `npm test`
+### Start frontend and backend
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Start two terminals:
 
-### `npm run build`
+Terminal1 to start the frontend:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+$ yarn start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Terminal2 to start the backend:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+$ yarn start-api
+```
 
-### `npm run eject`
+Then you should be able to see a broser window is opened at localhost:3000
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Start querying
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Input the first name, last name and zip code, then click the submit button. A piece of message about the transformed name, county and population will be displayed in a single line above the form area, if the query is successful;
+2. If you input any illegal string and submit the form, an error message will also be displayed telling you where goes wrong. The error message can be different, like `The first name can not be empty`, `Please input a valid first name!` and so on;
+3. Please be careful, **do not query for more than 5 times** in an hour, because of the limitatioin of the API I used. (But you can query infinitely with zip code 02115 if you want to do some testing). If you query too much, you will found message like:`HTTP failed! Code:401 `;
+4. The message denoting successful query is like: `Uningyay uanghay's zip code is in Suffolk County and has a population of 28441` with input `{first name = "Yuning", last name = "Huang", zip code = "02115"}`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Testing
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Frontend testing 
 
-## Learn More
+Note: Because of the mid-term exam this week and the workload of the course, I have little time to learn how to test frontend for interactive activities that I have no former experience before. But I write a naive test case with `enzyme` that you can find in `__test__` directory.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Test plans
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Test each components can be render correctly;
+2. Test the submit button and the changes of display area after clicking the button;
+3. Test if error message can be correctly shown with both inputing illegal inputs and legal inputs;
 
-### Code Splitting
+### Backend testing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+You can find unit tests of backend in `./api/tests/input_tests.py`.
 
-### Analyzing the Bundle Size
+#### Test plans
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Test illegal inputs and corresponding error messages;
+2. Test legal inputs and expected query results.

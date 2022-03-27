@@ -99,6 +99,7 @@ class TestQuery(unittest.TestCase):
         assert response3.data.decode() == "Please input a valid zip code!"
 
     def test_correct_input(self):
+        self.default_input["zipCode"] = "02116"
         json_input = json.dumps(self.default_input)
         response = self.client.post("/create_phrase", content_type='application/json', data=json_input)
         assert response.status_code == 200

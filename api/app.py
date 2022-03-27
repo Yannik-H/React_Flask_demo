@@ -44,7 +44,8 @@ def data_handler():
         county_req = requests.get(
             "https://service.zipapi.us/zipcode/county/{0}?X-API-KEY={1}".format(zipcode, ZIP_API_KEY),
             auth=HTTPBasicAuth(ZIP_USER_EMAIL, ZIP_USER_PASSWORD))
-
+        if population_req.status_code == 401:
+            raise InvalidInput("Zip API exceeded hourly limit", status_code=401)
         population = json.loads(population_req.content)["data"]["population"]
         county = json.loads(county_req.content)["data"]["county"][0]
 
