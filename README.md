@@ -41,7 +41,7 @@ Then you should be able to see a broser window is opened at localhost:3000
 
 1. Input the first name, last name and zip code, then click the submit button. A piece of message about the transformed name, county and population will be displayed in a single line above the form area, if the query is successful;
 2. If you input any illegal string and submit the form, an error message will also be displayed telling you where goes wrong. The error message can be different, like `The first name can not be empty`, `Please input a valid first name!` and so on;
-3. Please be careful, **do not query for more than 5 times** in an hour, because of the limitatioin of the API I used. (But you can query infinitely with zip code 02115 if you want to do some testing). If you query too much, you will found message like:`HTTP failed! Code:401 `;
+3. Be careful, **do not query for more than 5 times in an hour** because of the limitatioin of the API used in this project. (But you can query infinitely with zip code 02115 if you want to do some testing). If you query too much in an hour, you will find message like:`HTTP failed! Code:401 `;
 4. The message denoting successful query is like: `Uningyay uanghay's zip code is in Suffolk County and has a population of 28441` with input `{first name = "Yuning", last name = "Huang", zip code = "02115"}`.
 
 # Testing
