@@ -1,6 +1,6 @@
 # Getting Started
 
-Download and unzip the project. You can also find the project at [this github repository]([Yannik-H/React_Flask_demo: Naive implementation about query for the county and population through zip code. (github.com)](https://github.com/Yannik-H/React_Flask_demo)).
+Download and unzip the project. You can also find the project at []:[this repository](https://github.com/Yannik-H/React_Flask_demo).
 
 ### Install backend packages
 
@@ -70,3 +70,4 @@ You can find unit tests of backend in `./api/tests/input_tests.py`.
 # Reference
 
 [Zip query API]: [Zip API US - An API for performing various zip code related lookups](https://zipapi.us/)
+
