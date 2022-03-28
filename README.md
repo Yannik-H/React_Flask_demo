@@ -69,5 +69,4 @@ You can find unit tests of backend in `./api/tests/input_tests.py`.
 
 # Reference
 
-[Zip query API]: https://zipapi.us/
-
+[Zip query API]: [Zip API US - An API for performing various zip code related lookups](https://zipapi.us/)
