@@ -1,6 +1,6 @@
 # Getting Started
 
-Download and unzip the project. You can also find the project at [this repository](https://github.com/Yannik-H/React_Flask_demo).
+Download and unzip the project. You can also find the project at [this repository](https://github.com/Yannik-H/React_Flask_demo). Be sure `node.js`, `yarn` and `python` are installed befeore start runing.
 
 ### Install backend packages
 
